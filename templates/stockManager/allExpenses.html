@@ -1,0 +1,60 @@
+{% extends 'base.html'%} {% block content%}
+
+{%if messages %} 
+{%for message in messages %}
+<div class="mt-5 alert alert-success alert-dismissible fade show" role="alert">
+  {{message}}
+  <button type="button" class="close" data-dismiss="alert" aria-label="close">
+    x
+  </button>
+</div>
+
+{% endfor %} 
+{%endif%}
+<br />
+<table class="table table-striped table-bordered">
+  <h5 class="form-header  w-100 text-start text-decoration-underline mt-2">
+       EXPENSE LIST
+  </h5>
+  <nav aria-label="breadcrumb ">
+    <ol class="breadcrumb mt-0 mb-5">
+      <li class="breadcrumb-item active" aria-current="page"> <a href="{% url 'home:index'%}" class="text-secondary text-decoration-none" >Home</a></li>
+      <li class="breadcrumb-item active" aria-current="page"> <a href="{% url 'stockManager:addCustomer'%}" class="text-secondary text-decoration-none" >Add Customer</a></li>
+      <li class="breadcrumb-item active" aria-current="page"> <a href="{% url 'stockManager:addExpense'%}" class="text-secondary text-decoration-none" > Record Expense </a></li>
+    </ol>
+  </nav>
+  <hr>
+  <thead class="thead-dark" >
+    <th scope="col"></th>
+    <th scope="col">Date Spent</th>
+    <th scope="col">Expense  Tittle</th>
+    <th scope="col">Amount</th>
+  </thead>
+  <tbody>
+    {% for expense in expenses %}
+    <tr>
+      <th scope="row">{{customer.id}}</th>
+      <td>{{expense.date}}</td>
+      <td>{{expense.expense_tittle}}</td>
+      <td>{{expense.amount_spent}}</td>
+      <td>
+        <div class="d-flex justify-content-between">
+          {% comment %} <a
+            href="{% url 'stockManager:updateExpense' expense.Id %}"
+            type="button"
+            class="btn btn-outline-secondary "
+            >Update
+          </a> {% endcomment %}
+          {% comment %} <a
+            href="{% url 'stockManager:deleteExpense' expense.Id %}"
+            type="button"
+            class="btn btn-outline-danger "
+            >Delete</a
+          >
+        </div> {% endcomment %}
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
